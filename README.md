@@ -7,22 +7,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
-## 🚀 Live Demo
 
-<!-- 🔗 **[View Live Portfolio](https://your-portfolio-url.vercel.app)** -->
-
-_Coming Soon - Currently in Development_
-
-## ✨ Features
-
-- 🎨 **Modern Design** - Clean, professional interface with dark theme support
-- 📱 **Fully Responsive** - Optimized for desktop, tablet, and mobile devices
-- 🧭 **Fixed Navigation** - Smooth navigation with backdrop blur effects
-- 🌟 **Hero Section** - Eye-catching gradient design with personal branding
-- 📂 **Project Showcase** - Dedicated section for displaying my work
-- ⚡ **Smooth Animations** - CSS transforms and transitions for enhanced UX
-- 🔍 **SEO Optimized** - Proper meta tags and semantic HTML structure
-- 🚀 **Fast Performance** - Built with Next.js 15 for optimal loading speeds
 
 ## 🛠️ Tech Stack
 
