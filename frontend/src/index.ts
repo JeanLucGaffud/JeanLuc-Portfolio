@@ -3,7 +3,7 @@ import { drizzle } from 'drizzle-orm/neon-http';
 import { eq } from 'drizzle-orm';
 import { usersTable } from './db/schema';
   
-const db = drizzle(process.env.DATABASE_URL!);
+const db = drizzle(process.env.DATABASE_URL!, {casing: "camelCase"});
 
 async function main() {
   const user: typeof usersTable.$inferInsert = {
