@@ -1,5 +1,7 @@
 import  NavBar  from "@/components/ui/NavBar";
 
+
+
 export default function Home() {
   return (
     <div className="flex flex-col h-screen w-screen p-0 m-0 items-center">
