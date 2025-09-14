@@ -8,7 +8,7 @@ const timestamps = {
   createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
   deletedAt: timestamp({ withTimezone: true }),
 }
-//Use snake_case
+
 export const projectsTable = pgTable("projects", {
   id: serial().primaryKey(),
   title: varchar({ length: 255 }).notNull(),
@@ -31,31 +31,31 @@ export const projectsTable = pgTable("projects", {
   startDate: timestamp({ withTimezone: true }).notNull().defaultNow(),
   endDate: timestamp({ withTimezone: true }),
   featured: boolean().notNull().default(false),
-  priority: integer().notNull().default(0), // For ordering projects
+  priority: integer().notNull().default(0), 
   
   // Metadata
-  slug: varchar({ length: 255 }).notNull().unique(), // URL-friendly version of title
-  tags: json().$type<string[]>().notNull().default([]), // Additional tags for filtering
-  challenges: text(), // What challenges you faced
-  learnings: text(), // What you learned from this project
+  slug: varchar({ length: 255 }).notNull().unique(),
+  tags: json().$type<string[]>().notNull().default([]), 
+  challenges: text(), 
+  learnings: text(),
   
+  //Article timestamps
   ...timestamps,
 }, (table) => [
   // Indexes for better query performance
   index("projects_status_idx").on(table.status),
   index("projects_featured_idx").on(table.featured),
   index("projects_priority_idx").on(table.priority),
-  index("projects_category_idx").on(table.category),
+  index("projects_category_idx").on(table.category),  
   index("projects_slug_idx").on(table.slug), 
   index("projects_created_at_idx").on(table.createdAt),
   index("projects_deleted_at_idx").on(table.deletedAt),
 ]);
 
-// Types for TypeScript
+
 export type Project = typeof projectsTable.$inferSelect;
 export type NewProject = typeof projectsTable.$inferInsert;
 
-// Helper types for better development experience
 export type ProjectStatus = typeof projectStatusEnum.enumValues[number];
 export type ProjectWithoutTimestamps = Omit<Project, 'createdAt' | 'updatedAt' | 'deletedAt'>;
 export type ProjectForUpdate = Partial<Omit<NewProject, 'id' | 'createdAt'>> & { updatedAt?: Date };

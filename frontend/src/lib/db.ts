@@ -1,12 +1,11 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { eq } from 'drizzle-orm';
 import { NewProject, projectsTable } from '../db/schema';
   
-const db = drizzle(process.env.DATABASE_URL!, {casing: "camelCase"});
+const db = drizzle(process.env.DATABASE_URL!, {casing: "snake_case"});
 
 async function main() {
-    // Create a new project to insert
+
     const newProject: NewProject = {
         title: "Portfolio Website",
         description: "A modern, responsive portfolio built with Next.js 15, TypeScript, and Tailwind CSS featuring dark mode support and smooth animations.",
@@ -31,15 +30,14 @@ async function main() {
         learnings: "Gained expertise in modern React patterns, server components, and building production-ready applications with proper SEO and performance optimization."
     };
 
-    // Insert the project into the database
-    const insertedProject = await db.insert(projectsTable).values(newProject).returning();
+
+    const insertedProject = await db.select().from(projectsTable)
     
     console.log('Successfully inserted project:', insertedProject[0]);
     
-    // Query all projects to verify
+
     const allProjects = await db.select().from(projectsTable);
     console.log('All projects in database:', allProjects);
 }
 
-// Run the function
 main().catch(console.error);
