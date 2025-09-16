@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Link from "next/link";
-import { Button } from "@/components/shadcn/button"
-import  NavBar  from "@/components/ui/NavBar"
+import { Button } from "@/components/ui/button"
+import  NavBar  from "@/components/custom/NavBar"
 import { cn } from "@/lib/utils"
 import { FaReact, FaNodeJs, FaPython, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
@@ -13,7 +13,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/shadcn/card"
+} from "@/components/ui/card"
 
 interface ProjectCardProps {
   title: string;

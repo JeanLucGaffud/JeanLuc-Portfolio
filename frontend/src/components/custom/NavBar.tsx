@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { Button } from "@/components/shadcn/button";
+import { Button } from "@/components/ui/button";
 import { FaUser, FaHome, FaFolderOpen } from "react-icons/fa";
 
 export default function NavBar() {
