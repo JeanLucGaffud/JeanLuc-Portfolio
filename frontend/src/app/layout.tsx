@@ -12,9 +12,6 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Jean Luc's Portfolio",
   description: "Portfolio website on my experience as a Computer Science major",
-  verification: {
-    google: "R7_MyjaAXD5XmGMRrSvGIkJUEzGLEyWOwGtEUN9nfTg"
-  },
 };
 
  
