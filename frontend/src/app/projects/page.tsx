@@ -1,4 +1,4 @@
-import { getPaginatedProjects } from '@/lib/db';
+import { getPaginatedProjects } from '@/db/db';
 import NavBar from '@/components/custom/NavBar';
 import { SearchForm, ProjectsPagination, ProjectCard, EmptyState } from './_components';
 import type { Project } from '@/db/schema';

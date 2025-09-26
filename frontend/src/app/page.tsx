@@ -5,7 +5,7 @@ import  NavBar  from "@/components/custom/NavBar"
 import { cn } from "@/lib/utils"
 import { FaReact, FaNodeJs, FaPython, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
-import { getFeaturedProjects } from '@/lib/db';
+import { getFeaturedProjects } from '@/db/db';
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Card,

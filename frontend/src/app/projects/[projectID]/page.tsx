@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { CalendarDays, ExternalLink,  ArrowLeft, Clock, Tag } from 'lucide-react';
 import { FaGithub } from "react-icons/fa";
-import { getProjectBySlug } from '@/lib/db';
+import { getProjectBySlug } from '@/db/db';
 import { projectsTable } from '@/db/schema'
 import { createSelectSchema } from 'drizzle-zod';
 
