@@ -12,6 +12,9 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Jean Luc's Portfolio",
   description: "Portfolio website on my experience as a Computer Science major",
+  verification: {
+    google: "R7_MyjaAXD5XmGMRrSvGIkJUEzGLEyWOwGtEUN9nfTg"
+  },
 };
 
  
@@ -23,9 +26,7 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head>
-          <meta name="google-site-verification" content="R7_MyjaAXD5XmGMRrSvGIkJUEzGLEyWOwGtEUN9nfTg" />
-        </head>
+        <head/>
         
         <body className={`${roboto.variable} antialiased`}>
           <ThemeProvider
