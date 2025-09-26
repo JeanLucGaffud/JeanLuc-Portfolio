@@ -8,26 +8,133 @@ const db = drizzle(process.env.DATABASE_URL!, { casing: "snake_case" });
 // Sample seed data for projects
 const seedProjects: NewProject[] = [
   {
-    title: "Portfolio Website",
-    description: "A modern, responsive portfolio website built with Next.js and TypeScript",
-    longDescription: "This portfolio website showcases my projects and skills using cutting-edge web technologies. Built with Next.js 15, it features server-side rendering, optimized images, and a clean, modern design system using Tailwind CSS and shadcn/ui components.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Drizzle ORM", "PostgreSQL", "Vercel"],
-    status: "Complete",
+    title: "Portfolio/Blog Website",
+    description: "A minimalist, responsive portfolio website built with Next.js and TypeScript",
+    longDescription: "TBA",
+    technologies: [  "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Drizzle ORM", "Postgresql", "Vercel", "Reactjs"],
+    status: "In Progress",
     category: "Web Development",
-    demoUrl: "https://jeanluc-portfolio.vercel.app",
+    demoUrl: "https://jean-luc-portfolio.vercel.app",
     githubUrl: "https://github.com/JeanLucGaffud/JeanLuc-Portfolio",
-    imageUrl: "/projects/portfolio-hero.png",
-    thumbnailUrl: "/projects/portfolio-thumb.png",
-    screenshots: ["/projects/portfolio-1.png", "/projects/portfolio-2.png"],
-    startDate: new Date('2024-01-15'),
-    endDate: new Date('2024-02-28'),
+    imageUrl: null,
+    thumbnailUrl: null,
+    screenshots: [],
+    startDate: new Date('2025-09-07'),
+    endDate: null,
     featured: true,
     priority: 1,
     slug: "portfolio-website",
-    tags: ["React", "Frontend", "Full Stack", "Responsive"],
-    challenges: "Implementing server-side rendering while maintaining optimal performance and SEO optimization.",
-    learnings: "Gained deeper understanding of Next.js App Router, TypeScript best practices, and modern CSS techniques."
-  }
+    tags: ["React", "Full Stack"],
+    challenges: "TBA",
+    learnings: "TBA"
+  },
+  {
+    title: "Word Trivia Board Game",
+    description: "A console-based word trivia game featuring a grid board system, multiplayer support, and comprehensive admin functionality for word/clue management",
+    longDescription: 
+      "A sophisticated C programming project developed for CCPROG2 that implements a complete word trivia game with board-based gameplay. " +
+      "Players navigate through a grid board where each cell contains the first letter of a word, and must correctly guess words based on relation-value clues within a 10-second time limit. " +
+      "The game features a comprehensive admin system for managing words and clues, including CRUD operations, file import/export functionality, and data validation. " +
+      "The implementation demonstrates advanced C programming concepts including custom data structures, file I/O operations, string manipulation, time-based gameplay mechanics, and modular code organization with separate game and admin phases.",
+
+    technologies: ["C", "File I/O", "Struct Data Types", "String Manipulation", "Time Functions"],
+    status: "Complete",
+    category: "Console Gaming",
+    demoUrl: null,
+    githubUrl: null,
+    imageUrl: null,
+    thumbnailUrl: null,
+    screenshots: [],
+    startDate: new Date('2024-01-19'),
+    endDate: new Date('2024-04-01'),
+    featured: false,
+    priority: 4,
+    slug: "word-trivia-board-game",
+    tags: ["C Programming", "Game Development", "Data Structures", "Academic Project", "Console Application"],
+    challenges: 
+      "Implementing a dynamic board generation system that ensures unique first letters per row while maintaining randomization. " +
+      "Designing efficient search algorithms (linear, binary, and custom row search) for different data access patterns. " +
+      "Managing complex game state with multiple players, turn-based mechanics, and time constraints. " +
+      "Creating a robust admin system with comprehensive CRUD operations and file import/export functionality with duplicate handling and data validation.",
+    learnings: 
+      "Mastered advanced C programming concepts including complex struct hierarchies and pointer manipulation. " +
+      "Developed proficiency in file I/O operations for data persistence and import/export functionality. " +
+      "Learned to implement time-based game mechanics using C's time functions. " +
+      "Gained experience in designing modular program architecture with separate game and admin phases. " +
+      "Enhanced skills in string processing, input validation, and creating user-friendly console interfaces with menu systems."
+  },
+  {
+    title: "Motel Reservation System",
+    description: "A comprehensive motel management system with GUI interface for handling reservations, employee management, client records, and multi-branch operations",
+    longDescription: 
+      "A full-featured motel reservation and management system developed using Java Swing and MySQL database. " +
+      "The application provides a complete solution for motel operations including room booking management, employee administration, client record keeping, and multi-branch coordination. " +
+      "Features include real-time room availability checking, reservation scheduling, payment processing, employee role management, and comprehensive reporting capabilities. " +
+      "The system implements a robust database design with proper normalization, transaction handling, and data integrity constraints. " +
+      "Built with a user-friendly GUI interface using Java Swing components, providing intuitive navigation and efficient workflow management for motel staff and administrators.",
+    technologies: ["Java", "Java Swing", "MySQL", "JDBC", "SQL"],
+    status: "Complete",
+    category: "Desktop Application",
+    demoUrl: null,
+    githubUrl: null,
+    imageUrl: null,
+    thumbnailUrl: null,
+    screenshots: [],
+    startDate: new Date('2024-09-09'),
+    endDate: new Date('2024-11-23'),
+    featured: false,
+    priority: 3,
+    slug: "motel-reservation-system",
+    tags: ["Java", "Database Design", "Desktop Application", "Academic Project", "GUI Development"],
+    challenges: 
+      "Designing a normalized database schema to handle complex relationships between rooms, reservations, clients, employees, and multiple motel branches. " +
+      "Implementing concurrent booking management to prevent double-bookings and handle simultaneous reservation requests. " +
+      "Creating an intuitive GUI layout that accommodates multiple user roles (staff, managers, administrators) with appropriate access controls. " +
+      "Developing efficient SQL queries for complex reporting requirements including occupancy rates, revenue analytics, and operational metrics across multiple branches.",
+    learnings: 
+      "Gained proficiency in Java Swing for creating professional desktop applications with complex UI components and event handling. " +
+      "Mastered MySQL database design principles including normalization, indexing, and transaction management for business applications. " +
+      "Developed skills in JDBC programming for database connectivity and implementing proper connection pooling and error handling. " +
+      "Learned to design scalable software architecture with proper separation of concerns using MVC pattern and data access layers. " +
+      "Enhanced understanding of business logic implementation for real-world applications including reservation systems, inventory management, and user access controls."
+  }, 
+{
+    title: "The Forum",
+    description: "Reddit-style forum with user authentication, file uploads, infinite scrolling, post comments, and upvote/downvote system",
+    longDescription: 
+      "A full-featured forum application built with Node.js and Express, featuring community-based discussions similar to Reddit. " +
+      "The application provides comprehensive user management with authentication, community creation and management, post creation with image uploads, and interactive commenting systems. " +
+      "Features include user registration and login, community browsing, post creation with file upload capabilities, infinite scrolling for better performance, voting system for posts and comments, user profiles, and real-time content management. " +
+      "The system implements MongoDB for data persistence with proper schema design using Mongoose ODM, session management with MongoDB store, and secure file handling with Multer. " +
+      "Built with EJS templating engine and responsive design, providing an intuitive user interface for seamless forum interaction and content discovery.",
+    technologies: ["Node.js", "Express.js", "MongoDB", "Mongoose", "EJS", "JavaScript", "HTML/CSS", "Multer"],
+    status: "Complete",
+    category: "Web Application",
+    demoUrl: "https://the-forum.onrender.com/",
+    githubUrl: "https://github.com/JeanLucGaffud/The-Forum",
+    imageUrl: null,
+    thumbnailUrl: null,
+    screenshots: [],
+    startDate: new Date('2025-04-02'),
+    endDate: new Date('2025-04-07'),
+    featured: false,
+    priority: 3,
+    slug: "the-forum",
+    tags: ["Node.js", "Express", "MongoDB", "Forum", "Social Media", "Web Development", "Full-Stack"],
+    challenges: 
+      "Implementing efficient infinite scrolling to handle large amounts of forum content without performance degradation. " +
+      "Designing a scalable MongoDB schema to handle complex relationships between users, communities, posts, and comments with proper referencing. " +
+      "Creating a secure file upload system with proper validation and storage management for user-generated content. " +
+      "Implementing session-based authentication with secure cookie handling and proper user access controls across different forum features. " +
+      "Managing real-time content updates and vote counting while maintaining data consistency and preventing race conditions.",
+    learnings: 
+      "Mastered full-stack web development using Node.js and Express.js for building scalable server-side applications. " +
+      "Gained expertise in MongoDB and Mongoose ODM for designing efficient database schemas and managing complex data relationships. " +
+      "Developed skills in EJS templating engine for dynamic server-side rendering and creating reusable view components. " +
+      "Enhanced understanding of authentication systems, session management, and security best practices for web applications. " +
+      "Learned to implement advanced features like infinite scrolling, file uploads, and real-time user interactions in a forum-style application."
+}
+  
 ];
 
 /**

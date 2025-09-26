@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run db:setup && next dev --turbopack",
-    "dev:no-init": "next dev --turbopack",
+    "dev": "next dev --turbopack",
+    "dev:init": "npm run db:setup && next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",

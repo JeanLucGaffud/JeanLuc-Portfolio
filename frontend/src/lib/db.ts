@@ -1,9 +1,10 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { eq, desc, asc, and, isNull } from 'drizzle-orm';
+import { eq, desc, asc, and, isNull, or, ilike } from 'drizzle-orm';
 import { projectsTable, type Project, type NewProject } from '../db/schema';
   
 const db = drizzle(process.env.DATABASE_URL!, {casing: "snake_case"});
+
 
 // Export the database instance for use in other modules
 export { db };
@@ -19,6 +20,52 @@ export async function getProjects() {
         .orderBy(desc(projectsTable.priority), desc(projectsTable.createdAt));
     return projectsList;
 }
+
+/**
+ * Get projects paginated with total count
+ */
+export async function getPaginatedProjects(props: { page: number; limit?: number; query?: string }) {
+    const { page, limit = 6, query } = props;
+    
+    const baseCondition = isNull(projectsTable.deletedAt);
+    let whereCondition = baseCondition;
+    
+    // Add search functionality if query is provided
+    if (query && query.trim()) {
+        const searchCondition = or(
+            ilike(projectsTable.title, `%${query}%`),
+            ilike(projectsTable.description, `%${query}%`),
+            ilike(projectsTable.category, `%${query}%`)
+        );
+        whereCondition = and(baseCondition, searchCondition)!;
+    }
+    
+    const projectsList = await db
+        .select()
+        .from(projectsTable)
+        .where(whereCondition)
+        .orderBy(asc(projectsTable.priority), desc(projectsTable.createdAt))
+        .limit(limit)
+        .offset((page - 1) * limit);
+        
+    const totalCountResult = await db
+        .select({ count: projectsTable.id })
+        .from(projectsTable)
+        .where(whereCondition);
+    
+    const totalCount = totalCountResult.length;
+    const totalPages = Math.ceil(totalCount / limit);
+    
+    return {
+        projects: projectsList,
+        totalCount,
+        totalPages,
+        currentPage: page,
+        hasNextPage: page < totalPages,
+        hasPreviousPage: page > 1,
+    };
+}
+
 
 /**
  * Get featured projects only
