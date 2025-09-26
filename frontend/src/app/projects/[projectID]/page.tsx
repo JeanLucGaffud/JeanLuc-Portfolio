@@ -10,6 +10,10 @@ import { Separator } from '@/components/ui/separator';
 import { CalendarDays, ExternalLink,  ArrowLeft, Clock, Tag } from 'lucide-react';
 import { FaGithub } from "react-icons/fa";
 import { getProjectBySlug } from '@/lib/db';
+import { projectsTable } from '@/db/schema'
+import { createSelectSchema } from 'drizzle-zod';
+
+const projectSelectSchema = createSelectSchema(projectsTable)
 
 interface ProjectPageProps {
   params: Promise<{
@@ -22,12 +26,24 @@ interface ProjectPageProps {
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { projectID } = await params;
   
-  // Fetch project by slug (projectID is the slug)
-  const project = await getProjectBySlug(projectID);
-  
-  if (!project) {
+  if (!projectID || typeof projectID !== 'string' || projectID.trim().length === 0) {
     notFound();
   }
+  
+  const rawProject = await getProjectBySlug(projectID);
+  
+  if (!rawProject) {
+    notFound();
+  }
+
+  const result = projectSelectSchema.safeParse(rawProject);
+
+  if (!result.success) {
+    console.error('Project validation failed:', result.error);
+    notFound();
+  }
+
+  const project = result.data;
 
   // Format dates
   const formatDate = (date: Date | null) => {
@@ -47,7 +63,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {/* Header with back button */}
       <div className="container mx-auto px-4 py-6">
         <Link href="/projects">
-          <Button variant="ghost" className="mb-6">
+          <Button variant="outline" className="mb-6 hover:scale-105">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Projects
           </Button>

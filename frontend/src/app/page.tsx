@@ -1,11 +1,12 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button"
 import  NavBar  from "@/components/custom/NavBar"
 import { cn } from "@/lib/utils"
 import { FaReact, FaNodeJs, FaPython, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
-
+import { getFeaturedProjects } from '@/lib/db';
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Card,
   CardContent,
@@ -30,7 +31,9 @@ export default function Home() {
       <NavBar />
       <main className="pt-20">
         <HeroSection />
-        <ArticleSection />
+        <Suspense fallback={<ArticleSectionSkeleton />}>
+          <ArticleSection />
+        </Suspense>
       </main>
       <footer className="bg-muted/10 py-8 px-6 ">
         <div className="max-w-6xl mx-auto text-center">
@@ -100,33 +103,8 @@ export function HeroSection() {
   );
 }
 
-export function ArticleSection() {
-  const projects = [
-    {
-      title: "Portfolio Website",
-      description: "A modern, responsive portfolio built with Next.js 15, TypeScript, and Tailwind CSS featuring dark mode support and smooth animations.",
-      tech: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui"],
-      link: "/projects/portfolio",
-      github: "https://github.com/JeanLucGaffud/JeanLuc-Portfolio",
-      status: "Complete"
-    },
-    {
-      title: "Student Management System",
-      description: "A full-stack web application for managing student records, built as part of my coursework with CRUD operations and user authentication.",
-      tech: ["React", "Node.js", "Express", "MongoDB"],
-      link: "/projects/student-system",
-      github: "#",
-      status: "In Progress"
-    },
-    {
-      title: "Data Structures Visualizer",
-      description: "An interactive tool to visualize common data structures and algorithms, helping students understand complex concepts through animation.",
-      tech: ["JavaScript", "D3.js", "HTML5", "CSS3"],
-      link: "/projects/visualizer",
-      github: "#",
-      status: "In Progress"
-    }
-  ];
+export async function ArticleSection() {
+  const projects = await getFeaturedProjects();
 
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-muted/50 via-background to-background ">
@@ -142,8 +120,16 @@ export function ArticleSection() {
         </header>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
+          {projects.map((project) => (
+            <ProjectCard 
+              key={project.id} 
+              title={project.title}
+              description={project.description}
+              tech={project.technologies}
+              link={`/projects/${project.slug}`}
+              github={project.githubUrl || undefined}
+              status={project.status}
+            />
           ))}
         </div>
       </div>
@@ -240,6 +226,45 @@ function SocialLink({ href, icon, label }: { href: string; icon: ReactNode; labe
     >
       {icon}
     </Link>
+  );
+}
+
+// Loading skeleton for ArticleSection
+function ArticleSectionSkeleton() {
+  return (
+    <section className="py-20 px-6 bg-gradient-to-b from-muted/50 via-background to-background">
+      <div className="max-w-6xl mx-auto">
+        <header className="text-center mb-16">
+          <Skeleton className="h-10 w-80 mx-auto mb-4" />
+          <Skeleton className="h-6 w-96 mx-auto" />
+        </header>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <Card key={index} className="h-full flex flex-col">
+              <CardHeader className="flex-1">
+                <Skeleton className="h-6 w-3/4 mb-2" />
+                <Skeleton className="h-4 w-full mb-1" />
+                <Skeleton className="h-4 w-2/3" />
+              </CardHeader>
+              
+              <CardContent className="pt-0">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {Array.from({ length: 3 }).map((_, techIndex) => (
+                    <Skeleton key={techIndex} className="h-6 w-16" />
+                  ))}
+                </div>
+              </CardContent>
+              
+              <CardFooter className="pt-0 gap-2">
+                <Skeleton className="h-8 flex-1" />
+                <Skeleton className="h-8 flex-1" />
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 

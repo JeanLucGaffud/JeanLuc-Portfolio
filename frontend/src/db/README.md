@@ -16,10 +16,10 @@ The following npm scripts are available for database management:
 ### Development Scripts
 
 ```bash
-# Start development server with automatic database setup
+# Start development server without database initialization
 npm run dev
 
-# Start development server without database initialization
+# Start development server with automatic database setup
 npm run dev:no-init
 ```
 

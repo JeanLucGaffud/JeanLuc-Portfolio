@@ -1,12 +1,22 @@
 import { getPaginatedProjects } from '@/lib/db';
 import NavBar from '@/components/custom/NavBar';
 import { SearchForm, ProjectsPagination, ProjectCard, EmptyState } from './_components';
+import type { Project } from '@/db/schema';
 
-interface ProjectsListProps{
+interface ProjectsListProps {
   searchParams?: Promise<{
-      query?: string;
-      page?: string;
-    }>;
+    query?: string;
+    page?: string;
+  }>;
+}
+
+interface PaginationData {
+  projects: Project[];
+  totalCount: number;
+  currentPage: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
 }
 
 export default async function ProjectsListPage(props: ProjectsListProps) {
@@ -14,7 +24,7 @@ export default async function ProjectsListPage(props: ProjectsListProps) {
   const currentPage = Number(searchParams?.page) || 1;
   const query = searchParams?.query || '';
   
-  const paginationData = await getPaginatedProjects({ 
+  const paginationData: PaginationData = await getPaginatedProjects({ 
     page: currentPage, 
     limit: 6, 
     query 
