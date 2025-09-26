@@ -24,6 +24,7 @@ export default function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <head />
+        <meta name="google-site-verification" content="R7_MyjaAXD5XmGMRrSvGIkJUEzGLEyWOwGtEUN9nfTg" />
         <body className={`${roboto.variable} antialiased`}>
           <ThemeProvider
             attribute="class"
