@@ -23,8 +23,10 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
-        <meta name="google-site-verification" content="R7_MyjaAXD5XmGMRrSvGIkJUEzGLEyWOwGtEUN9nfTg" />
+        <head>
+          <meta name="google-site-verification" content="R7_MyjaAXD5XmGMRrSvGIkJUEzGLEyWOwGtEUN9nfTg" />
+        </head>
+        
         <body className={`${roboto.variable} antialiased`}>
           <ThemeProvider
             attribute="class"
