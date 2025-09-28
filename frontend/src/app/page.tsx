@@ -15,7 +15,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-
+import {signIn, signUp} from "@/server/users"
+import {headers } from "next/headers"
+import { auth } from "@/lib/auth";
+import SignOut from "@/components/custom/SignOut";
 interface ProjectCardProps {
   title: string;
   description: string;
@@ -25,11 +28,22 @@ interface ProjectCardProps {
   status: string;
 }
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
+
+  
   return (
     <div className="min-h-screen w-full">
       <NavBar />
-      <main className="pt-20">
+      <main className="pt-50">
+        <p> {!session ? "Please sign in" : session.user.email}</p>
+        <SignOut />
+
+        <button onClick={signIn} className="m-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">Sign In</button>
+        
+        <button onClick={signUp} className="m-4 p-2 bg-green-500 text-white rounded hover:bg-green-600 transition">Sign Up</button>
         <HeroSection />
         <Suspense fallback={<ArticleSectionSkeleton />}>
           <ArticleSection />
