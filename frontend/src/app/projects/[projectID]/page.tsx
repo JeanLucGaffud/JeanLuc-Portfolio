@@ -1,4 +1,18 @@
-
+import { AppSidebar } from "@/components/custom/app-sidebar"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,7 +20,6 @@ import { Metadata } from 'next';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 import { CalendarDays, ExternalLink,  ArrowLeft, Clock, Tag } from 'lucide-react';
 import { FaGithub } from "react-icons/fa";
 import { getProjectBySlug } from '@/db/db';
@@ -21,53 +34,73 @@ interface ProjectPageProps {
   }>;
 }
 
-
-
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { projectID } = await params;
+    const { projectID } = await params;
+    
+    if (!projectID || typeof projectID !== 'string' || projectID.trim().length === 0) {
+      notFound();
+    }
+    
+    const rawProject = await getProjectBySlug(projectID);
+    
+    if (!rawProject) {
+      notFound();
+    }
   
-  if (!projectID || typeof projectID !== 'string' || projectID.trim().length === 0) {
-    notFound();
-  }
+    const result = projectSelectSchema.safeParse(rawProject);
   
-  const rawProject = await getProjectBySlug(projectID);
+    if (!result.success) {
+      console.error('Project validation failed:', result.error);
+      notFound();
+    }
   
-  if (!rawProject) {
-    notFound();
-  }
-
-  const result = projectSelectSchema.safeParse(rawProject);
-
-  if (!result.success) {
-    console.error('Project validation failed:', result.error);
-    notFound();
-  }
-
-  const project = result.data;
-
-  // Format dates
-  const formatDate = (date: Date | null) => {
-    if (!date) return null;
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }).format(new Date(date));
-  };
-
-  const startDate = formatDate(project.startDate);
-  const endDate = formatDate(project.endDate);
+    const project = result.data;
+  
+    // Format dates
+    const formatDate = (date: Date | null) => {
+      if (!date) return null;
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }).format(new Date(date));
+    };
+  
+    const startDate = formatDate(project.startDate);
+    const endDate = formatDate(project.endDate);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header with back button */}
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "350px",
+        } as React.CSSProperties
+      }
+    >
+      <AppSidebar />
+      <SidebarInset>
+        <header className="bg-background sticky top-0 flex shrink-0 items-center gap-2 border-b p-4">
+          <SidebarTrigger className="-ml-1" />
+          <Separator
+            orientation="vertical"
+            className="mr-2 data-[orientation=vertical]:h-4"
+          />
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem className="">
+                <Link href="/projects" >
+                  
+                  <Button variant="outline" className="hover:scale-105">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    <p className="hidden md:block">Back to Projects</p>
+                  </Button>
+                </Link>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </header>
+
       <div className="container mx-auto px-4 py-6">
-        <Link href="/projects">
-          <Button variant="outline" className="mb-6 hover:scale-105">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Projects
-          </Button>
-        </Link>
 
         {/* Main content */}
         <div className="max-w-4xl mx-auto">
@@ -296,6 +329,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
       </div>
-    </div>
-  );
+      </SidebarInset>
+    </SidebarProvider>
+  )
 }
