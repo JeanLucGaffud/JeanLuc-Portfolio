@@ -76,15 +76,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           "--sidebar-width": "350px",
         } as React.CSSProperties
       }
+      
     >
-      <AppSidebar />
-      <SidebarInset>
-        <header className="bg-background sticky top-0 flex shrink-0 items-center gap-2 border-b p-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
+      
+      <SidebarInset >
+        <header className="bg-background sticky top-0 flex shrink-0 items-center gap-2 border-b pl-10 p-4 py-3 justify-between ">
+          
+        
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="">
@@ -98,6 +96,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
+          <SidebarTrigger className="-mr-1 " />
         </header>
 
       <div className="container mx-auto px-4 py-6">
@@ -152,82 +151,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </div>
 
+          
+
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Main Content */}
-            <div className="md:col-span-2 space-y-8">
-              {/* Description */}
-              {project.longDescription && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>About This Project</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                      {project.longDescription}
-                    </p>
-                  </CardContent>
-                </Card>
-              )}
-
-              {/* Challenges */}
-              {project.challenges && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Challenges & Solutions</CardTitle>
-                    <CardDescription>
-                      Key technical and design challenges encountered during development
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                      {project.challenges}
-                    </p>
-                  </CardContent>
-                </Card>
-              )}
-
-              {/* Learnings */}
-              {project.learnings && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Key Learnings</CardTitle>
-                    <CardDescription>
-                      Skills and knowledge gained from this project
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                      {project.learnings}
-                    </p>
-                  </CardContent>
-                </Card>
-              )}
-
-              {/* Screenshots */}
-              {project.screenshots && project.screenshots.length > 0 && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Screenshots</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {project.screenshots.map((screenshot, index) => (
-                        <div key={index} className="relative aspect-video rounded-lg overflow-hidden">
-                          <Image
-                            src={screenshot}
-                            alt={`${project.title} screenshot ${index + 1}`}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-
-            {/* Sidebar */}
+                      {/* Sidebar */}
             <div className="space-y-6">
               {/* Project Info */}
               <Card>
@@ -326,10 +253,86 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </CardContent>
               </Card>
             </div>
+            {/* Main Content */}
+            <div className="md:col-span-2 space-y-8">
+              {/* Description */}
+              {project.longDescription && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>About This Project</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                      {project.longDescription}
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Challenges */}
+              {project.challenges && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Challenges & Solutions</CardTitle>
+                    <CardDescription>
+                      Key technical and design challenges encountered during development
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                      {project.challenges}
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Learnings */}
+              {project.learnings && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Key Learnings</CardTitle>
+                    <CardDescription>
+                      Skills and knowledge gained from this project
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                      {project.learnings}
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Screenshots */}
+              {project.screenshots && project.screenshots.length > 0 && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Screenshots</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {project.screenshots.map((screenshot, index) => (
+                        <div key={index} className="relative aspect-video rounded-lg overflow-hidden">
+                          <Image
+                            src={screenshot}
+                            alt={`${project.title} screenshot ${index + 1}`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+
+  
           </div>
         </div>
       </div>
       </SidebarInset>
+      <AppSidebar />
     </SidebarProvider>
   )
 }

@@ -133,10 +133,23 @@ export const verification = pgTable("verification", {
     .notNull(),
 });
 
+export const comments = pgTable("comments", {
+  id: serial().primaryKey(),
+  projectId: integer("project_id").notNull().references(() => projectsTable.id, { onDelete: "cascade" }),
+  userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .notNull(),
+});
+
 export const schema = {
   projectsTable,
   user,
   session,
+  comments,
   account,
   verification,
 };
