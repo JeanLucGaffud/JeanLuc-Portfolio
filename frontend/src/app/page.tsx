@@ -34,7 +34,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen w-full">
       <NavBar />
-      <main className="pt-50">
+      <main className="pt-35">
         <HeroSection />
         <Suspense fallback={<ArticleSectionSkeleton />}>
           <ArticleSection />

@@ -25,6 +25,7 @@ import { FaGithub } from "react-icons/fa";
 import { getProjectBySlug } from '@/db/db';
 import { projectsTable } from '@/db/schema'
 import { createSelectSchema } from 'drizzle-zod';
+import { getCommentsForProject } from '@/server/comments';
 
 const projectSelectSchema = createSelectSchema(projectsTable)
 
@@ -56,6 +57,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   
     const project = result.data;
   
+    // Fetch comments for this project
+    const comments = await getCommentsForProject(projectID);
+  
     // Format dates
     const formatDate = (date: Date | null) => {
       if (!date) return null;
@@ -73,7 +77,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <SidebarProvider
       style={
         {
-          "--sidebar-width": "350px",
+          "--sidebar-width": "600px",
         } as React.CSSProperties
       }
       
@@ -332,7 +336,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </div>
       </SidebarInset>
-      <AppSidebar />
+      <AppSidebar comments={comments} />
     </SidebarProvider>
   )
 }

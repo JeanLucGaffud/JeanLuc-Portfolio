@@ -85,7 +85,7 @@ export function NavUser({
             
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              {user?.name ? (
+              {user?.email !== "" ? (
                 <div onClick={() => signOut()} className="flex items-center gap-2">
                   <LogOut />
                   Sign Out

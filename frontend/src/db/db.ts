@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { eq, desc, asc, and, isNull, or, ilike } from 'drizzle-orm';
-import { projectsTable, type Project, type NewProject } from './schema';
+import { projectsTable, type Project, type NewProject , commentsTable} from './schema';
   
 const db = drizzle(process.env.DATABASE_URL!, {casing: "snake_case"});
 
@@ -178,3 +178,4 @@ export async function getProjectStats() {
     
     return stats;
 }
+

@@ -133,7 +133,7 @@ export const verification = pgTable("verification", {
     .notNull(),
 });
 
-export const comments = pgTable("comments", {
+export const commentsTable = pgTable("comments", {
   id: serial().primaryKey(),
   projectId: integer("project_id").notNull().references(() => projectsTable.id, { onDelete: "cascade" }),
   userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
@@ -145,11 +145,15 @@ export const comments = pgTable("comments", {
     .notNull(),
 });
 
+
+
+
+
 export const schema = {
   projectsTable,
   user,
   session,
-  comments,
+  commentsTable, 
   account,
   verification,
 };
