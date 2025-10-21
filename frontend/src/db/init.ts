@@ -9,9 +9,9 @@ const db = drizzle(process.env.DATABASE_URL!, { casing: "snake_case" });
 const seedProjects: NewProject[] = [
   {
     title: "Portfolio/Blog Website",
-    description: "A minimalist, responsive portfolio website built with Next.js and TypeScript",
-    longDescription: "TBA",
-    technologies: [  "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Drizzle ORM", "Postgresql", "Vercel", "Reactjs"],
+    description: "A minimalist, responsive portfolio and technical blog showcasing projects, writing, and a developer resume",
+    longDescription: "A production-ready personal portfolio and blog built with Next.js and TypeScript. The site focuses on fast performance, accessible components, and a clean design system. It includes project pages, a modular component library (shadcn/ui-inspired components), full-text search, pagination for projects, and a simple comments API for project posts. The project demonstrates modern frontend engineering practices: server-side rendering, incremental static regeneration, TypeScript-first code, automated database seeding for demo content, and CI-friendly deployment settings.",
+    technologies: ["Next.js", "TypeScript", "React", "Tailwind CSS", "shadcn/ui", "Drizzle ORM", "PostgreSQL", "Vercel", "ESLint", "Prettier"],
     status: "In Progress",
     category: "Web Development",
     demoUrl: "https://jean-luc-portfolio.vercel.app",
@@ -24,20 +24,25 @@ const seedProjects: NewProject[] = [
     featured: true,
     priority: 1,
     slug: "portfolio-website",
-    tags: ["React", "Full Stack"],
-    challenges: "TBA",
-    learnings: "TBA"
+    tags: ["Next.js", "TypeScript", "Frontend", "Accessibility", "Performance"],
+    challenges: 
+      "Balancing a minimal visual design with clear information hierarchy across devices. " +
+      "Creating a reusable component library that is accessible and themeable while keeping bundle size small. " +
+      "Designing a simple content workflow for blog posts and project pages with lightweight moderation for comments.",
+    learnings: 
+      "Refined skills building production-ready Next.js apps with TypeScript and Tailwind CSS. " +
+      "Improved accessibility awareness, including keyboard navigation and ARIA practices for interactive components. " +
+      "Gained experience integrating Drizzle ORM with server-side code and writing deterministic seed scripts for demo content. " +
+      "Learned to optimize web performance (image optimization, code-splitting, and selective SSR) to achieve fast load times and good Lighthouse scores."
   },
   {
     title: "Word Trivia Board Game",
-    description: "A console-based word trivia game featuring a grid board system, multiplayer support, and comprehensive admin functionality for word/clue management",
+    description: "Console word-trivia game with a grid-based board, multiplayer turns, and an admin console for managing words and clues",
     longDescription: 
-      "A sophisticated C programming project developed for CCPROG2 that implements a complete word trivia game with board-based gameplay. " +
-      "Players navigate through a grid board where each cell contains the first letter of a word, and must correctly guess words based on relation-value clues within a 10-second time limit. " +
-      "The game features a comprehensive admin system for managing words and clues, including CRUD operations, file import/export functionality, and data validation. " +
-      "The implementation demonstrates advanced C programming concepts including custom data structures, file I/O operations, string manipulation, time-based gameplay mechanics, and modular code organization with separate game and admin phases.",
+      "A complete console-based word-trivia game written in C for an academic systems programming course. The game presents players with a grid board where each cell contains a first-letter hint; players then guess whole words using concise relation/value clues under a strict time limit. " +
+      "The project includes a fully-featured admin tool for adding, editing, importing, and exporting word/clue datasets with validation and duplicate detection. The codebase emphasizes low-level data structures (custom linked lists and arrays), safe string handling, and deterministic file I/O for persistent game data. The project demonstrates practical systems programming skills and readiness for performance- and memory-constrained environments.",
 
-    technologies: ["C", "File I/O", "Struct Data Types", "String Manipulation", "Time Functions"],
+    technologies: ["C", "File I/O", "Custom Data Structures", "String Processing", "Time Functions", "Unit Testing (asserts)"],
     status: "Complete",
     category: "Console Gaming",
     demoUrl: null,
@@ -52,16 +57,15 @@ const seedProjects: NewProject[] = [
     slug: "word-trivia-board-game",
     tags: ["C Programming", "Game Development", "Data Structures", "Academic Project", "Console Application"],
     challenges: 
-      "Implementing a dynamic board generation system that ensures unique first letters per row while maintaining randomization. " +
-      "Designing efficient search algorithms (linear, binary, and custom row search) for different data access patterns. " +
-      "Managing complex game state with multiple players, turn-based mechanics, and time constraints. " +
-      "Creating a robust admin system with comprehensive CRUD operations and file import/export functionality with duplicate handling and data validation.",
+      "Building a deterministic board-generator that balances randomness with playable constraints (unique starting letters per row). " +
+      "Implementing efficient search and retrieval routines for different data shapes and use-cases while maintaining readable, maintainable C code. " +
+      "Managing concurrent game state across turns with time-limited input and graceful input validation and recovery. " +
+      "Designing an admin import/export format with duplicate detection and robust file parsing to prevent corruption.",
     learnings: 
-      "Mastered advanced C programming concepts including complex struct hierarchies and pointer manipulation. " +
-      "Developed proficiency in file I/O operations for data persistence and import/export functionality. " +
-      "Learned to implement time-based game mechanics using C's time functions. " +
-      "Gained experience in designing modular program architecture with separate game and admin phases. " +
-      "Enhanced skills in string processing, input validation, and creating user-friendly console interfaces with menu systems."
+      "Deepened understanding of memory management and pointers in C, including careful ownership and lifetime considerations. " +
+      "Improved skills in designing and testing file I/O formats for robustness and recoverability. " +
+      "Practiced implementing responsive, time-limited user interactions in a console environment and designing clear menu-driven admin tools. " +
+      "Learned to structure C programs modularly (separating gameplay logic, data management, and admin utilities) for maintainability."
   },
   {
     title: "Motel Reservation System",
